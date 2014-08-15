@@ -6,7 +6,7 @@
  * Time: 2:36 AM
  */
 try{
-      $objDb = new PDO ('sqlite:../dbase/shopping-list');
+      $objDb = new PDO ('sqlite:shopping-list.sqlite3');
       $objDb->setAttribute(PDO::ATTR_ERRMODE, PDO:: ERRMODE_EXCEPTION );
 
         $sql = "SELECT `i`.*,

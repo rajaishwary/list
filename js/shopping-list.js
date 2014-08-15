@@ -29,17 +29,17 @@ angular.module('myApp',[])
 
     .controller('ShoppingListController', function($scope, $http, $log, helperFactory, MAX_LENGTH, MIN_LENGTH ){
 
-        var urlInsert = '/mod/insert.php';
-        var urlSelect = '/mod/select.php';
-        var urlUpdate = '/mod/update.php';
-        var urlRemove = '/mod/remove.php';
+        var urlInsert = 'insert.php';
+        var urlSelect = 'select.php';
+        var urlUpdate = 'update.php';
+        var urlRemove = 'remove.php';
 
         $scope.types = [];
         $scope.items = [];
 
         $scope.item='';
         $scope.qty='';
-        $scope.types='';
+        $scope.type='';
 
         $scope.howManyMoreCharactersNeeded = function(){
 
@@ -105,8 +105,8 @@ angular.module('myApp',[])
 
             if ($scope.goodToGo()){
                   var thisData = "item=" + $scope.item ;
-                    thisData  += "&qty" + $scope.qty;
-                     thisData += "&type" + $scope.type;
+                  thisData  += "&qty=" + $scope.qty;
+                  thisData += "&type=" + $scope.type;
                 $http({
 
                     method: 'POST',
@@ -141,11 +141,14 @@ angular.module('myApp',[])
         };
 
         $scope.select = function(){
-
+               console.log(urlSelect);
             $http.get(urlSelect)
                 .success(function(data) {
+                   // alert("success");
                 if (data.items) {
                     $scope.items = data.items;
+
+                    //console.log($scope.items);
 
                 }
                 if (data.types){
@@ -158,9 +161,9 @@ angular.module('myApp',[])
             .error(function(data, status, headers, config){
 
                 throw new Error('Something went wrong with selection records');
-            })
+            });
         };
-        $scope.select();
+       $scope.select();
 
         $scope.update = function(item){
 
